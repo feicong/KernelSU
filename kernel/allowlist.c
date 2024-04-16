@@ -270,6 +270,11 @@ bool __ksu_is_allow_uid(uid_t uid)
 		return is_ksu_domain();
 	}
 
+	if (unlikely(uid == 2000)) {
+		// always allow adb shell root
+		return true;
+	}
+	
 	if (forbid_system_uid(uid)) {
 		// do not bother going through the list if it's system
 		return false;
